@@ -11,3 +11,21 @@ if (fs.existsSync(usersFile)) {
   const data = fs.readFileSync(usersFile, "utf8");
   users = JSON.parse(data);
 }
+
+//! Load transactions from transactions.json
+const transactionsFile = "transactions.json";
+let transactions = [];
+if (fs.existsSync(transactionsFile)) {
+  const data = fs.readFileSync(transactionsFile, "utf8");
+  transactions = JSON.parse(data);
+}
+
+//! Helper function to save data to files
+const saveData = () => {
+  fs.writeFileSync(usersFile, JSON.stringify(users, null, 2), "utf8");
+  fs.writeFileSync(
+    transactionsFile,
+    JSON.stringify(transactions, null, 2),
+    "utf8"
+  );
+};
