@@ -21,6 +21,8 @@ function generatePIN() {
   }
 }
 
+
+
 let nextUserID = 1002;
 
 function generateUserID() {
