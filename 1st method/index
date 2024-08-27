@@ -92,3 +92,13 @@ const checkBalance = (user) => {
   console.log(`Your current balance is: $${user.balance}`);
   
 };
+
+
+//! Deposit Money
+const depositMoney = (user) => {
+  const amount = parseFloat(
+    readlineSync.question("Enter the deposit amount: ")
+  );
+  eventEmitter.emit("deposit", user, amount);
+  console.log(`Deposit successful! New balance: $${user.balance}`);
+};
