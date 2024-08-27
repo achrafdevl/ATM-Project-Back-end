@@ -102,3 +102,23 @@ const depositMoney = (user) => {
   eventEmitter.emit("deposit", user, amount);
   console.log(`Deposit successful! New balance: $${user.balance}`);
 };
+
+
+//! Withdraw Money
+const withdrawMoney = (user) => {
+  const amount = parseFloat(
+    readlineSync.question("Enter the withdrawal amount: ")
+  );
+  eventEmitter.emit("withdraw", user, amount);
+  console.log(`Withdrawal successful! New balance: $${user.balance}`);
+};
+
+//! Viewing Transaction History
+const viewTransactionHistory = (user) => {
+  console.log("Transaction History:");
+  user.transactions.forEach((transaction) => {
+    console.log(
+      `${transaction.type} - $${transaction.amount} - ${transaction.date}`
+    );
+  });
+};
