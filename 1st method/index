@@ -29,3 +29,20 @@ const saveData = () => {
     "utf8"
   );
 };
+
+//! Event listeners for different ATM operations
+eventEmitter.on("deposit", (user, amount) => {
+  user.balance += amount;
+  user.transactions.push({
+    type: "deposit",
+    amount,
+    date: new Date().toISOString().split("T")[0],
+  });
+  transactions.push({
+    accountID: user.accountID,
+    type: "deposit",
+    amount,
+    date: new Date().toISOString(),
+  });
+  saveData();
+});
