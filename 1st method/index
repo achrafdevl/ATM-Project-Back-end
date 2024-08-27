@@ -1,0 +1,13 @@
+const fs = require("fs");
+const readlineSync = require("readline-sync");
+const EventEmitter = require("events");
+
+const eventEmitter = new EventEmitter();
+
+//! Load users from users.json
+const usersFile = "users.json";
+let users = [];
+if (fs.existsSync(usersFile)) {
+  const data = fs.readFileSync(usersFile, "utf8");
+  users = JSON.parse(data);
+}
