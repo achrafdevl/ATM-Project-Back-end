@@ -143,3 +143,71 @@ const addUser = () => {
   eventEmitter.emit("addUser", newUser);
   console.log("User added successfully!");
 };
+
+
+//! Main program flow
+const main = () => {
+  while (true) {
+    console.log("\n================ Welcome To CASH BANK ================");
+    console.log("\nOptions:");
+    console.log("1. Login to your Account");
+    console.log("2. Add User");
+    console.log("3. Exit");
+
+    const choice = parseInt(readlineSync.question("Enter your choice: "), 10);
+
+    switch (choice) {
+      case 1:
+        const user = authenticateUser();
+        if (user) {
+          performUserOperations(user);
+        }
+        break;
+      case 2:
+        addUser();
+        break;
+      case 3:
+        console.log("Exiting...");
+        return;
+      default:
+        console.log("Invalid choice. Please try again.");
+    }
+  }
+};
+
+
+const performUserOperations = (user) => {
+  while (true) {
+    console.log("\nOptions:");
+    console.log("1. Check Balance");
+    console.log("2. Deposit Money");
+    console.log("3. Withdraw Money");
+    console.log("4. View Transaction History");
+    console.log("5. Exit");
+
+    const choice = parseInt(readlineSync.question("Enter your choice: "), 10);
+
+    switch (choice) {
+      case 1:
+        checkBalance(user);
+        break;
+      case 2:
+        depositMoney(user);
+        break;
+      case 3:
+        withdrawMoney(user);
+        break;
+      case 4:
+        viewTransactionHistory(user);
+        break;
+      case 5:
+        console.log("Exiting...");
+        return;
+      default:
+        console.log("Invalid choice. Please try again.");
+    }
+  }
+};
+
+
+main();
