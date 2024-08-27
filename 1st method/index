@@ -122,3 +122,24 @@ const viewTransactionHistory = (user) => {
     );
   });
 };
+
+//! Adding a new User
+const addUser = () => {
+  const name = readlineSync.question("Enter your name: ");
+  const pin = readlineSync.question("Set your pin (4 digits): ", {
+    hideEchoBack: true,
+  });
+
+  const accountID = `ACC${users.length + 1}`; //? Generate a new unique accountID
+  const newUser = {
+    accountID,
+    name,
+    pin,
+    balance: 0.0,
+    transactions: [],
+  };
+
+  users.push(newUser);
+  eventEmitter.emit("addUser", newUser);
+  console.log("User added successfully!");
+};
