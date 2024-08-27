@@ -46,3 +46,49 @@ eventEmitter.on("deposit", (user, amount) => {
   });
   saveData();
 });
+
+eventEmitter.on("withdraw", (user, amount) => {
+  if (user.balance >= amount) {
+    user.balance -= amount;
+    user.transactions.push({
+      type: "withdraw",
+      amount,
+      date: new Date().toISOString().split("T")[0],
+    });
+    transactions.push({
+      accountID: user.accountID,
+      type: "withdraw",
+      amount,
+      date: new Date().toISOString(),
+    });
+    saveData();
+  } else {
+    console.log("Insufficient funds!");
+  }
+});
+
+eventEmitter.on("addUser", (user) => {
+  saveData();
+});
+
+const authenticateUser = () => {
+  const accountID = readlineSync.question("Enter your accountID: ");
+  const pin = readlineSync.question("Enter your pin: ", { hideEchoBack: true });
+
+  const user = users.find((u) => u.accountID === accountID && u.pin === pin);
+
+  if (user) {
+    console.log("Authentication successful!");
+    return user;
+  } else {
+    console.log("Invalid credentials. Please try again.");
+    return null;
+  }
+};
+
+
+//! Checking Balance
+const checkBalance = (user) => {
+  console.log(`Your current balance is: $${user.balance}`);
+  
+};
